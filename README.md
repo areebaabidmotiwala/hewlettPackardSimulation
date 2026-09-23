@@ -1,11 +1,15 @@
 # HPE Employee Web Service
 
-A Spring Boot web service for managing employee records, built as a portfolio project.
+A Spring Boot REST web service for managing employee records, built while completing the
+[Hewlett Packard Enterprise Software Engineering Job Simulation on Forage](https://www.theforage.com/).
+
+This project is for learning and portfolio purposes and is not affiliated with or
+endorsed by Hewlett Packard Enterprise.
 
 ## Status
 
-🚧 Early development. The domain model is in place; the REST controller and data
-access layer are stubbed out and not yet implemented.
+🚧 In development. The domain model, DAO, and core REST endpoints are implemented
+with in-memory sample data; persistence, validation, and tests are still to come.
 
 ## Tech Stack
 
@@ -20,13 +24,23 @@ access layer are stubbed out and not yet implemented.
 src/main/java/com/hwewebservice/employees/
 ├── EmployeesApplication.java   # Spring Boot entry point
 ├── controller/
-│   └── employeecontroller.java # REST controller (not yet implemented)
+│   └── employeecontroller.java # REST controller: GET/POST /employees
 ├── dao/
-│   └── employeeDAO.java        # Data access layer (not yet implemented)
+│   └── employeeDAO.java        # In-memory data store, seeded with sample employees
 └── model/
     ├── employee.java           # Employee record: id, first/last name, email, title
-    └── employees.java          # In-memory collection wrapper for Employee
+    └── employees.java          # Collection wrapper for Employee
 ```
+
+## API Endpoints
+
+| Method | Path              | Description                        |
+|--------|-------------------|------------------------------------|
+| GET    | `/employees`      | List all employees                 |
+| GET    | `/employees/{id}` | Get a single employee by ID        |
+| POST   | `/employees`      | Add a new employee                 |
+
+The service starts with four sample employees pre-loaded in memory.
 
 ## Getting Started
 
@@ -48,7 +62,8 @@ src/main/java/com/hwewebservice/employees/
 
 ## Roadmap
 
-- [ ] Implement `EmployeeController` REST endpoints (CRUD)
-- [ ] Implement `EmployeeDAO` for persistence
+- [ ] Add persistent storage (e.g. a database) in place of the in-memory list
+- [ ] Add PUT/DELETE endpoints for updating and removing employees
 - [ ] Add request/response validation
+- [ ] Add unit and integration tests
 - [ ] Add API documentation
