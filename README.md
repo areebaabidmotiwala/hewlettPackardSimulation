@@ -6,6 +6,9 @@ A Spring Boot REST web service for managing employee records, built while comple
 This project is for learning and portfolio purposes and is not affiliated with or
 endorsed by Hewlett Packard Enterprise.
 
+See [docs/proposal.md](docs/proposal.md) for the original Task 1 proposal that this
+implementation (Task 2) is based on.
+
 ## Status
 
 🚧 In development. The domain model, DAO, and core REST endpoints are implemented

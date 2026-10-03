@@ -32,10 +32,10 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable String id) {
         Employee employee = employeeDAO.getEmployeeById(id);
-        if(employee.getEmployeeId() == null){
+        if(employee == null){
             throw new IllegalArgumentException("Employee with ID " + id + " not found.");
         }
-        return employeeDAO.getEmployeeById(id);
+        return employee;
     }
 
     @PostMapping

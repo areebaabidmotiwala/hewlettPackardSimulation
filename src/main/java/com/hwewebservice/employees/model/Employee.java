@@ -1,11 +1,18 @@
 package com.hwewebservice.employees.model;
 
+import tools.jackson.databind.PropertyNamingStrategies;
+import tools.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Employee{
     private String employeeId;
     private String firstName;
     private String lastName;
     private String email;
     private String title;
+
+    public Employee(){
+    }
 
     public Employee(String employeeId, String firstName, String lastName, String email, String title){
         this.employeeId = employeeId;
