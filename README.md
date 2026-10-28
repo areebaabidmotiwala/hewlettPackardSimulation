@@ -11,8 +11,9 @@ implementation (Task 2) is based on.
 
 ## Status
 
-🚧 In development. The domain model, DAO, and core REST endpoints are implemented
-with in-memory sample data; persistence, validation, and tests are still to come.
+🚧 In development. The domain model, employee manager, and core REST endpoints are
+implemented with in-memory sample data, including adding employees via JSON `POST`
+requests. Persistence, validation, and fuller tests are still to come.
 
 ## Tech Stack
 
@@ -25,14 +26,14 @@ with in-memory sample data; persistence, validation, and tests are still to come
 
 ```
 src/main/java/com/hwewebservice/employees/
-├── EmployeesApplication.java   # Spring Boot entry point
+├── RestServiceApplication.java  # Spring Boot entry point
 ├── controller/
-│   └── employeecontroller.java # REST controller: GET/POST /employees
+│   └── EmployeeController.java  # REST controller: GET/POST /employees
 ├── dao/
-│   └── employeeDAO.java        # In-memory data store, seeded with sample employees
+│   └── EmployeeManager.java     # In-memory data store, seeded with sample employees
 └── model/
-    ├── employee.java           # Employee record: id, first/last name, email, title
-    └── employees.java          # Collection wrapper for Employee
+    ├── Employee.java            # Employee record: id, first/last name, email, title
+    └── Employees.java           # Collection wrapper for Employee
 ```
 
 ## API Endpoints
@@ -43,7 +44,27 @@ src/main/java/com/hwewebservice/employees/
 | GET    | `/employees/{id}` | Get a single employee by ID        |
 | POST   | `/employees`      | Add a new employee                 |
 
-The service starts with four sample employees pre-loaded in memory.
+The service starts with four sample employees pre-loaded in memory. New employees are
+kept in memory only, so they are lost when the application restarts.
+
+### Adding an employee
+
+JSON fields use snake_case:
+
+```bash
+curl -X POST http://localhost:8080/employees \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "employee_id": "5",
+        "first_name": "Jordan",
+        "last_name": "Lee",
+        "email": "jordan.lee@example.com",
+        "title": "Data Analyst"
+      }'
+```
+
+The response echoes the created employee. A subsequent `GET /employees` returns it
+alongside the sample data, wrapped in an `employeeList` array.
 
 ## Getting Started
 
@@ -56,6 +77,15 @@ The service starts with four sample employees pre-loaded in memory.
 ```bash
 ./gradlew bootRun
 ```
+
+Or build and run the executable jar:
+
+```bash
+./gradlew bootJar
+java -jar build/libs/employees-0.0.1-SNAPSHOT.jar
+```
+
+The service listens on `http://localhost:8080`.
 
 ### Run tests
 

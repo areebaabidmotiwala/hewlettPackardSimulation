@@ -11,27 +11,28 @@ import com.hwewebservice.employees.model.Employee;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.hwewebservice.employees.dao.EmployeeDAO;
+import com.hwewebservice.employees.dao.EmployeeManager;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-    private final EmployeeDAO employeeDAO;
+    private final EmployeeManager employeeManager;
 
-    public EmployeeController(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    public EmployeeController(EmployeeManager employeeManager) {
+        this.employeeManager = employeeManager;
     }
 
     @GetMapping
     public Employees getAllEmployees() {
-        return employeeDAO.getAllEmployees();
+        return employeeManager.getAllEmployees();
     }
 
     @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable String id) {
-        Employee employee = employeeDAO.getEmployeeById(id);
+        Employee employee = employeeManager.getEmployeeById(id);
         if(employee == null){
             throw new IllegalArgumentException("Employee with ID " + id + " not found.");
         }
@@ -40,7 +41,7 @@ public class EmployeeController {
 
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
-        employeeDAO.addEmployee(employee);
+        employeeManager.addEmployee(employee);
         return employee;        
     }
     

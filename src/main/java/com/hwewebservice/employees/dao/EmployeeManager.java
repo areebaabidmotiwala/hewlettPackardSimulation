@@ -6,10 +6,10 @@ import com.hwewebservice.employees.model.Employee;
 import com.hwewebservice.employees.model.Employees;
 
 @Repository
-public class EmployeeDAO {
+public class EmployeeManager {
     private final Employees employees = new Employees();
 
-    public EmployeeDAO() {
+    public EmployeeManager() {
         // Initialize with some sample data
         employees.getEmployeeList().add(new Employee("1", "John", "Doe", "john.doe@example.com", "Software Engineer"));
         employees.getEmployeeList().add(new Employee("2", "Jane", "Smith", "jane.smith@example.com", "Project Manager"));
